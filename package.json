@@ -4,7 +4,10 @@
   "description": "A panel to sell goods",
   "main": "start.js",
   "scripts": {
-    "start": "nodemon ./start.js"
+    "start": "node ./start.js"
+  },
+  "engines": {
+    "node": "14.x"
   },
   "author": "amirmahmoudi",
   "license": "ISC",
