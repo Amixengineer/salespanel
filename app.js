@@ -2,7 +2,6 @@ const AdminJS = require("adminjs");
 const AdminJSExpress = require("@adminjs/express");
 const express = require("express");
 const options = require("./admin.options");
-// const bu = require("./admin.router");
 const app = express();
 const path = require("path");
 
@@ -19,7 +18,8 @@ app.use(express.static(path.resolve(__dirname, "assets")));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// get the cookies coming from request
-// app.use(cookieParser());
+app.use("/", (req, res) => {
+  res.json("welcom to the store");
+});
 
 module.exports = app;
