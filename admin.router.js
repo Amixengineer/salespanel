@@ -5,12 +5,12 @@ const MongoStore = require('connect-mongo');
 require('dotenv').config({ path: 'variables.env' });
 const {
   authenticationClosure,
-} = require('../node_modules/admin-bro-users-permissions/src/authentication');
-const userResource = require('../node_modules/admin-bro-users-permissions/src/resources/user');
-const roleResource = require('../node_modules/admin-bro-users-permissions/src/resources/role');
+} = require('./node_modules/admin-bro-users-permissions/src/authentication');
+const userResource = require('./node_modules/admin-bro-users-permissions/src/resources/user');
+const roleResource = require('./node_modules/admin-bro-users-permissions/src/resources/role');
 
 /**
- * @param {AdminBro} admin
+ * @param {AdminJS} admin
  * @return {express.Router} router
  */
 

@@ -1,6 +1,5 @@
 const express = require('express');
 const req = require('express/lib/request');
-const app = express();
 const mongoose = require('mongoose');
 require('dotenv').config({ path: 'variables.env' })
 
@@ -14,6 +13,7 @@ mongoose.connection.on('error', (err) => {
   console.error(`🙅 🚫 🙅 🚫 🙅 🚫 🙅 🚫 → ${err.message}`);
 })
 
+const app = require('./app');
 
 // import our models here
 

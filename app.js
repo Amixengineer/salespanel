@@ -2,17 +2,15 @@ const AdminJS = require('adminjs');
 const AdminJSExpress = require('@adminjs/express');
 const express = require('express');
 const options = require('./admin.options');
-// const buildAdminRouter = require('./admin.router');
+const buildAdminRouter = require('./admin.router');
 const app = express();
 const path = require('path');
 
-const adminJs = new AdminJS(options);
+const admin = new AdminJS(options);
 
+const router = AdminJSExpress.buildAdminRouter(admin);
 
-const router = AdminJSExpress.buildRouter(adminJs);
-// buildAdminRouter(adminJs);
-
-app.use(adminJs.options.rootPath, router);
+app.use(admin.options.rootPath, router);
 
 
 // our static files and assets

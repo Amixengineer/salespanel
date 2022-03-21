@@ -1,12 +1,15 @@
 const mongoose = require('mongoose');
 const adminJs = require('adminjs');
 const adminJsMongoose = require('@adminjs/mongoose');
-const adminCompanny = require('./company/company.admin');
+const adminCompany = require('./company/company.admin');
 const product = require('./company/company.product');
+const credit = require('./company/company.credit');
 const customer = require('./company/company.customer');
-const { Credit } = require('./models/Credit');
-const { Customer } = require('./models/Customer');
-const { Product } = require('./models/Product');
+const userResource = require('./node_modules/admin-bro-users-permissions/src/resources/user');
+const roleResource = require('./node_modules/admin-bro-users-permissions/src/resources/role');
+// const { Credit } = require('./models/Credit');
+// const { Customer } = require('./models/Customer');
+// const { Product } = require('./models/Product');
 
 // const userResource = require('../node_modules/admin-bro-users-permissions/src/resources/user');
 // const roleResource = require('../node_modules/admin-bro-users-permissions/src/resources/role');
@@ -28,6 +31,9 @@ const options = {
         Product: 'محصولات',
         filters: 'فیلتر کردن',
       },
+      actions: {
+        delete: 'پاک کردن',
+      },
       messages: {
         invalidCredentials: 'کلمه عبور یا ایمیل شما اشتباه میباشد.',
         loginWelcome:
@@ -47,6 +53,11 @@ const options = {
             list: 'لیست نسیه ها',
             edit: 'ویرایش',
             show: 'نمایش اطلاعات',
+          },
+          properties: {
+            fullName: 'نام و نام خانوادگی',
+            product: 'محصول',
+            price: 'مبلغ نسیه به تومان',
           },
           buttons: {
             filter: 'فیلتر',
@@ -102,10 +113,40 @@ const options = {
     }
   },
   resources: [
-    Credit,
+    credit,
     product,
-    customer
-    //  adminCompanny,
+    customer,
+    adminCompany,
+    userResource.initResource(mongoose, {
+      resourceSchema: {
+        fullname: {
+          type: String,
+          required: 'Fullname is required.',
+        },
+      },
+      resourceOptions: {
+        parent: {
+          name: 'administartor Area',
+        },
+        properties: {
+          _id: {
+            isVisible: false,
+          },
+        },
+      },
+    }),
+    roleResource.initResource(mongoose, {
+      resourceOptions: {
+        parent: {
+          name: 'administartor Area',
+        },
+        properties: {
+          _id: {
+            isVisible: false,
+          },
+        },
+      },
+    }),
   ],
   assets: {
     styles: ['/styles/styles.css']
